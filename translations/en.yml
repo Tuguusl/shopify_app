@@ -66,6 +66,10 @@ parts:
       title: "Wait message when the app loads"
       value: "Requesting customer data from Shopify..."
   - translation:
+      key: "txt.apps.shopify_app.global.setup"
+      title: "Message in app asking user to setup integration"
+      value: "This app needs to be configured in Shopify."
+  - translation:
       key: "txt.apps.shopify_app.orders.id"
       title: "Title inside the app to show the recent orders for that specific user"
       value: "RECENT ORDERS"

@@ -74,6 +74,10 @@
     "requesting": {
       "title": "Wait message when the app loads",
       "value": "Requesting customer data from Shopify..."
+    },
+    "setup": {
+      "title": "Message in app asking user to setup integration",
+      "value": "This app needs to be configured in Shopify."
     }
   },
   "orders": {

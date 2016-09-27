@@ -1,0 +1,4 @@
+<div id="setup">
+    <div id="setup-text" class="content">{{t "global.setup"}}</div>
+    <div id="setup-button-container"><a id="setup-button" href="https://apps.shopify.com/zendesk" target="_blank" class="btn btn-inverse">Set up</a></div>
+</div>

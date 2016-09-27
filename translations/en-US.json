@@ -28,7 +28,8 @@
       "wrongOrder": "Order e-mail does not match requester e-mail"
     },
     "loading": "Waiting for customer data...",
-    "requesting": "Requesting customer data from Shopify..."
+    "requesting": "Requesting customer data from Shopify...",
+    "setup": "This app needs to be configured in Shopify."
   },
   "orders": {
     "id": "RECENT ORDERS",
