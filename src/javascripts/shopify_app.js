@@ -77,6 +77,7 @@ var ShopifyApp = {
   events: {
     'app.created': 'init',
     'ticket.requester.email.changed' : 'queryCustomer',
+    'user.email.changed': 'queryCustomer',
     'getProfile.done' : 'handleProfile',
     'getProfile.fail' : 'handleProfileFail',
     'getOrders.done' : 'handleOrders',
@@ -93,7 +94,8 @@ var ShopifyApp = {
 
     this.loadSprites();
 
-    if (this.currentLocation() === 'ticket_sidebar') {
+    if (this.currentLocation() === 'ticket_sidebar' ||
+        this.currentLocation() === 'user_sidebar') {
       this.queryCustomer();
     }
   },
