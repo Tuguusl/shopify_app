@@ -86,7 +86,8 @@ var ShopifyApp = {
     'getOrder.fail' : 'handleOrdersFail',
     'shown.bs.collapse .panel-group': 'resizeApp',
     'hidden.bs.collapse .panel-group': 'resizeApp',
-    'click #orders-toggle': 'toggleOrders'
+    'click #orders-toggle': 'toggleOrders',
+    'click .order-id': 'stopPropagation'
   },
 
   init: function() {
@@ -339,6 +340,10 @@ var ShopifyApp = {
 
   isZatEnabled: function() {
     return (parseInt(this.id()) === 0);
+  },
+
+  stopPropagation: function(event) {
+      event.stopPropagation();
   }
 }
 
