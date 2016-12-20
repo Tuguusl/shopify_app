@@ -3,8 +3,7 @@
     <ul class="flat-dotted-list">
       <li>
         <h4 class="panel-title">
-          <a class="collapsed" role="button" aria-expanded="false" aria-controls="order-{{id}}"
-             href="{{uri}}" target="_blank" onClick="event.stopPropagation();">
+          <a class="collapsed order-id" role="button" aria-expanded="false" aria-controls="order-{{id}}" href="{{uri}}" target="_blank" >
             {{name}}
           </a>
         </h4>
