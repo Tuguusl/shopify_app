@@ -77,6 +77,7 @@ var ShopifyApp = {
   events: {
     'app.created': 'init',
     'ticket.requester.email.changed' : 'queryCustomer',
+    'user.email.changed': 'queryCustomer',
     'getProfile.done' : 'handleProfile',
     'getProfile.fail' : 'handleProfileFail',
     'getOrders.done' : 'handleOrders',
@@ -93,7 +94,8 @@ var ShopifyApp = {
 
     this.loadSprites();
 
-    if (this.currentLocation() === 'ticket_sidebar') {
+    if (this.currentLocation() === 'ticket_sidebar' ||
+        this.currentLocation() === 'user_sidebar') {
       this.queryCustomer();
     }
   },
@@ -227,10 +229,10 @@ var ShopifyApp = {
       newOrder.fulfillment_status = true;
     }
 
-    if (order.note === "" || order.note === null) {
-      newOrder.note = this.I18n.t('customer.no_notes');
-    } else {
+    if (order.note) {
       newOrder.note = this.truncateTextToLimit(order.note);
+    } else {
+      newOrder.note = this.I18n.t('customer.no_notes');
     }
 
     if (order.created_at) {
@@ -279,6 +281,64 @@ var ShopifyApp = {
 
     TweenMax.to("#orders-toggle", .5, {rotation: rotation});
     $('section[data-orders] .panel-collapse').collapse(show);
+  },
+
+  resizeApp: function() {
+    let newHeight = $('body').height();
+    this.zafClient.invoke('resize', { height: newHeight, width: '100%' });
+  },
+
+  localeDate: function(date) {
+    return new Date(date).toLocaleString(this.currentLocale);
+  },
+
+  updateTemplate: function(name, data, klass) {
+    if (this.currentState !== 'profile') {
+      this.switchTo('profile');
+    }
+
+    var selector = '.' + (klass || name);
+    this.$(selector).html(this.renderTemplate(name, data));
+    this.resizeApp();
+  },
+
+  showError: function(title, msg, klass) {
+    var data = {
+      title: title || this.I18n.t('global.error.title'),
+      message: msg || this.I18n.t('global.error.message')
+    };
+
+    if (klass) {
+      this.updateTemplate('error', data, klass);
+    } else {
+      this.switchTo('error', data);
+    }
+  },
+
+  checkStoreUrl: function(url) {
+    // First, lets make sure there is no trailing slash, we'll add one later.
+    if (url.slice(-1) === '/') { url = url.slice(0, -1); }
+    // Test whether we have a front-controller reference here.
+    if (url.indexOf('index.php') === -1)
+    {
+      // Nothing to do, the front-controller isn't in the url, pass it back unaltered.
+      return url;
+    }
+    url = url.replace(/\/index\.php/g, '');
+    return url;
+  },
+
+  queryCustomer: function() {
+    var self = this;
+    this.switchTo('requesting');
+    const emailKey = /ticket_sidebar$/.test(this.currentLocation()) ? 'ticket.requester.email' : 'user.email';
+    this.zafClient.get(emailKey).then(function(data) {
+      self.ajax('getProfile', data[emailKey]);
+    });
+  },
+
+  isZatEnabled: function() {
+    return (this.id() === 0);
   }
 }
 
