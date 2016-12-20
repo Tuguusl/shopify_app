@@ -1,9 +1,9 @@
 <div class="panel panel-default u-pv-sm u-pv">
-  <div class="panel-heading" role="tab" id="heading-{{id}}">
+  <div class="panel-heading accordion-toggle" role="tab" id="heading-{{id}}" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}">
     <ul class="flat-dotted-list">
       <li>
         <h4 class="panel-title">
-          <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#order-{{id}}" aria-expanded="false" aria-controls="order-{{id}}">
+          <a class="collapsed" role="button" aria-expanded="false" aria-controls="order-{{id}}">
             {{name}}
           </a>
         </h4>
