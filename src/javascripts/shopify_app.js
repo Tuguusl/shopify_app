@@ -338,7 +338,7 @@ var ShopifyApp = {
   },
 
   isZatEnabled: function() {
-    return (this.id() === 0);
+    return (parseInt(this.id()) === 0);
   }
 }
 
