@@ -1,6 +1,4 @@
 import BaseApp from 'base_app';
-import $ from 'jquery';
-
 import TweenMax from 'gsap';
 
 var gravatar = require('gravatar');
@@ -84,6 +82,7 @@ var ShopifyApp = {
     'getOrders.fail' : 'handleOrdersFail',
     'getOrder.done' : 'handleOrder',
     'getOrder.fail' : 'handleOrdersFail',
+    'show.bs.collapse .panel-group': 'collapseOpenPanels',
     'shown.bs.collapse .panel-group': 'resizeApp',
     'hidden.bs.collapse .panel-group': 'resizeApp',
     'click #orders-toggle': 'toggleOrders',
@@ -209,7 +208,7 @@ var ShopifyApp = {
 
     newOrder.uri = this.storeUrl + this.resources.ORDER_PATH + order.id;
 
-    if (this.setting('items_purchased')) {    
+    if (this.setting('items_purchased')) {
       newOrder.items_purchased = _.map(order.line_items, function(line_item) {
         var item = [];
         item.title = line_item.title;
@@ -253,7 +252,7 @@ var ShopifyApp = {
 
     return newOrder;
   },
-  
+
   truncateTextToLimit: function (text) {
     if (text.length > this.noteCharacterLimit) {
       return text.substr(0, this.noteCharacterLimit) + '...';
@@ -263,8 +262,8 @@ var ShopifyApp = {
 
   loadSprites: function() {
     var svg = require('zd-svg-icons/dist/index.svg');
-    var $svg = $('<object id="mySVG" type="image/svg+xml"/>').css('display', 'none').append(svg);
-    $('body').prepend($svg);
+    var $svg = this.$('<object id="mySVG" type="image/svg+xml"/>').css('display', 'none').append(svg);
+    this.$('body').prepend($svg);
   },
 
   toggleOrders: function() {
@@ -281,11 +280,14 @@ var ShopifyApp = {
     }
 
     TweenMax.to("#orders-toggle", .5, {rotation: rotation});
-    $('section[data-orders] .panel-collapse').collapse(show);
+    this.$('section[data-orders] .panel-collapse')
+          .addClass('grouped-action')
+          .collapse(show)
+          .removeClass('grouped-action');
   },
 
   resizeApp: function() {
-    let newHeight = $('body').height();
+    let newHeight = this.$('body').height();
     this.zafClient.invoke('resize', { height: newHeight, width: '100%' });
   },
 
@@ -344,6 +346,12 @@ var ShopifyApp = {
 
   stopPropagation: function(event) {
       event.stopPropagation();
+  },
+
+  collapseOpenPanels: function(x) {
+      this.$('section[data-orders] .panel-group .in')
+          .not('.grouped-action')
+          .collapse('hide');
   }
 }
 
