@@ -9,8 +9,8 @@
 
 <hr/>
 <!---- Order list ---->
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">    
 {{#each orders}}
-<div class="panel-group" id="accordion-{{id}}" role="tablist" aria-multiselectable="true">
   {{> order}}
-</div>
 {{/each}}
+</div>
