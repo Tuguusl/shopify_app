@@ -3,7 +3,7 @@
     {{t "global.setup"}}
   </div>
   <div>
-    <a href="https://apps.shopify.com/zendesk/install" target="_blank" class="c-btn c-btn--accent">
+    <a href="https://shopify.zendesk-integrations.com/zendesk/install?subdomain={{ subdomain }}" target="_blank" class="c-btn c-btn--accent">
       {{t "global.setup_button"}}
     </a>
   </div>
