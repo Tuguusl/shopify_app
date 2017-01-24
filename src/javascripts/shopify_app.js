@@ -142,13 +142,12 @@ var ShopifyApp = {
   },
 
   handleProfileFail: function(response) {
-    var _self = this;
     if (response.status == 401) {
       this.zafClient.context().then(function(context) {
-        _self.switchTo('setup', {
+        this.switchTo('setup', {
           subdomain: context.account.subdomain
         });
-      });
+      }).bind(this);
     } else {
       var error = JSON.parse(response.responseText);
       this.showError(error.errors);
