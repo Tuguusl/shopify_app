@@ -143,7 +143,11 @@ var ShopifyApp = {
 
   handleProfileFail: function(response) {
     if (response.status == 401) {
-      this.switchTo('setup');
+      this.zafClient.context().then(function(context) {
+        this.switchTo('setup', {
+          subdomain: context.account.subdomain
+        });
+      }).bind(this);
     } else {
       var error = JSON.parse(response.responseText);
       this.showError(error.errors);
@@ -348,7 +352,7 @@ var ShopifyApp = {
       event.stopPropagation();
   },
 
-  collapseOpenPanels: function(x) {
+  collapseOpenPanels: function() {
       this.$('section[data-orders] .panel-group .in')
           .not('.grouped-action')
           .collapse('hide');
