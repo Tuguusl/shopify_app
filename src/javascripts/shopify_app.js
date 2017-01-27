@@ -104,7 +104,8 @@ var ShopifyApp = {
     return {
       headers  : {
         'X-Shopify-Access-Token': this.setting('access_token'),
-        'X-Requested-With': 'XMLHttpRequest'
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-Zendesk-Strip-Header': 'WWW-Authenticate'
       },
       url      : this.storeUrl + resource,
       method   : 'GET',
@@ -142,12 +143,13 @@ var ShopifyApp = {
   },
 
   handleProfileFail: function(response) {
+    var _self = this;
     if (response.status == 401) {
       this.zafClient.context().then(function(context) {
-        this.switchTo('setup', {
+        _self.switchTo('setup', {
           subdomain: context.account.subdomain
         });
-      }).bind(this);
+      });
     } else {
       var error = JSON.parse(response.responseText);
       this.showError(error.errors);
