@@ -105,7 +105,7 @@ var ShopifyApp = {
       headers  : {
         'X-Shopify-Access-Token': this.setting('access_token'),
         'X-Requested-With': 'XMLHttpRequest',
-        'X-Zendesk-Strip-Header': 'WWW-Authenticate'
+        'X-Zendesk-Drop-WWW-Authenticate': 1
       },
       url      : this.storeUrl + resource,
       method   : 'GET',
