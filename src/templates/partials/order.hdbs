@@ -37,14 +37,14 @@
           <div>{{title}}</div>
         </div>
       {{/if}}
-      {{#if shipping_address}}
+      {{#if shipping_address.address1}}
         <div class="u-mv-sm">
           <div class="u-semibold o-label">{{t "app.parameters.shipping_address.label.value"}}</div>
           <div>{{shipping_address.address1}} {{shipping_address.address2}}</div>
           <div>{{shipping_address.city}}, {{shipping_address.province_code}} {{shipping_address.zip}}</div>
         </div>
       {{/if}}
-      {{#if billing_address}}
+      {{#if billing_address.address1}}
         <div class="u-mv-sm">
           <div class="u-semibold o-label">{{t "app.parameters.billing_address.label.value"}}</div>
           <div>{{billing_address.address1}} {{billing_address.address2}}</div>
