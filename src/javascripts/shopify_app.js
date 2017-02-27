@@ -126,7 +126,9 @@ var ShopifyApp = {
 
     this.customer = data.customers[0];
 
-    if (this.setting('customer_notes') && (this.customer.note === "" || this.customer.note === null)) {
+    if (!this.setting('customer_notes')) {
+      this.customer.note = false;
+    } else if (this.customer.note === "" || this.customer.note === null) {
       this.customer.note = this.I18n.t('customer.no_notes');
     } else {
       this.customer.note = this.truncateTextToLimit(this.customer.note);
