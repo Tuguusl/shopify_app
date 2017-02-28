@@ -198,7 +198,7 @@ var ShopifyApp = {
     this.$('section[data-orders]').html(
       this.renderTemplate('order/list', {
         orders: this.orders.slice(0,3),
-        ordersUri: this.storeUrl + this.resources.ORDER_PATH
+        ordersUri: this.storeUrl + this.resources.ORDER_PATH + '?query=&customer_id=' + this.customer.id
       })
     );
 
