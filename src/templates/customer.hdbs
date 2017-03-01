@@ -1,4 +1,9 @@
-<div class="l-media u-mb-sm">
+{{#if shopName}}
+<div class="u-mb-sm u-epsilon u-thin">
+  {{shopName}}
+</div>
+{{/if}}
+<div class="l-media u-mv-sm">
   <a href="{{customer.uri}}" target="_blank">
     <img class="l-media__figure u-mr-xs" src="{{customer.image}}" alt=""/>
   </a>
