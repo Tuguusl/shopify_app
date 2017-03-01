@@ -27,11 +27,14 @@ var ShopifyApp = {
 
   storeUrl: '',
 
+  storeName: '',
+
   resources: {
     PROFILE_URI       : '/admin/customers/search.json',
     CUSTOMER_URI      : '/admin/customers/',
     ORDERS_URI        : '/admin/orders.json',
-    ORDER_PATH        : '/admin/orders/'
+    ORDER_PATH        : '/admin/orders/',
+    SHOP_URI          : '/admin/shop.json'
   },
 
   requests: {
@@ -69,6 +72,9 @@ var ShopifyApp = {
     },
     'getOrder': function(order_id) {
       return this.getRequest(this.resources.ORDER_PATH + order_id + '.json');
+    },
+    'getShop': function() {
+      return this.getRequest(this.resources.SHOP_URI);
     }
   },
 
@@ -86,11 +92,16 @@ var ShopifyApp = {
     'shown.bs.collapse .panel-group': 'resizeApp',
     'hidden.bs.collapse .panel-group': 'resizeApp',
     'click #orders-toggle': 'toggleOrders',
-    'click .order-id': 'stopPropagation'
+    'click .order-id': 'stopPropagation',
+    'getShop.done' : 'handleGetShop'
   },
 
   init: function() {
     this.storeUrl = this.storeUrl || this.checkStoreUrl(this.setting('url'));
+
+    if (this.setting('storefront_name')) {
+      this.ajax('getShop');
+    }
 
     this.loadSprites();
 
@@ -138,7 +149,8 @@ var ShopifyApp = {
     this.customer.image = gravatar.url(this.customer.email, {s: 20, d: 'mm'});
 
     this.switchTo('customer', {
-      customer: this.customer
+      customer: this.customer,
+      shopName: this.shopName
     });
 
     this.displayOrder();
@@ -362,6 +374,10 @@ var ShopifyApp = {
       this.$('section[data-orders] .panel-group .in')
           .not('.grouped-action')
           .collapse('hide');
+  },
+
+  handleGetShop: function(response) {
+    this.shopName = response.shop.name;
   }
 }
 
