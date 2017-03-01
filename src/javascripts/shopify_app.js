@@ -237,10 +237,12 @@ var ShopifyApp = {
       newOrder.fulfillment_status = true;
     }
 
-    if (order.note) {
-      newOrder.note = this.truncateTextToLimit(order.note);
-    } else {
-      newOrder.note = this.I18n.t('customer.no_notes');
+    if (this.setting.order_notes) {
+      if (order.note) {
+        newOrder.note = this.truncateTextToLimit(order.note);
+      } else {
+        newOrder.note = this.I18n.t('customer.no_notes');
+      }
     }
 
     if (order.created_at) {
