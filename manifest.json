@@ -3,14 +3,15 @@
     "name": "Zendesk",
     "email": "support@zendesk.com"
   },
-
-  "location": ["ticket_sidebar", "new_ticket_sidebar"],
+  "location": [
+    "ticket_sidebar",
+    "new_ticket_sidebar"
+  ],
   "defaultLocale": "en",
   "private": false,
   "singleInstall": false,
   "frameworkVersion": "1.0",
-  "version": "1.0.1",
-
+  "version": "1.0.3",
   "parameters": [
     {
       "name": "url",
