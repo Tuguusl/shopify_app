@@ -174,11 +174,14 @@ var ShopifyApp = {
     var _self = this;
 
     if (! this.isZatEnabled()) {
+      console.log('zat disabled');
       this.zafClient.get('requirement:shopify_order_id').then(function(data) {
+        console.log(data);
         var fieldId = data['requirement:shopify_order_id'].requirement_id;
         var fieldName = 'ticket.customField:custom_field_' + fieldId;
 
         _self.zafClient.get(fieldName).then(function(customField) {
+          console.log(customField);
           if (!_.isEmpty(customField[fieldName])) {
             _self.ajax('getOrder', customField[fieldName]);
           } else {
@@ -187,6 +190,7 @@ var ShopifyApp = {
         });
       });
     } else {
+      console.log('zat emabled');
       _self.ajax('getOrders', _self.customer.id);
     }
   },
