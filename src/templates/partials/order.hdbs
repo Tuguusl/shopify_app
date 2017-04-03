@@ -55,7 +55,7 @@
         <div class="u-mv-sm">
             <div class="u-semibold o-label">{{t "app.parameters.tracking_numbers.label.value"}}</div>
             {{#each tracking_numbers}}
-              <div> <a href="{{tracking_url}}">{{tracking_number}}</a></div>
+              <div> <a href="{{tracking_url}}" target="_blank">{{tracking_number}}</a></div>
             {{/each}}
         </div>
       {{/if}}
