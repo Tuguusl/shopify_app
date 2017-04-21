@@ -15,7 +15,7 @@ parts:
   - translation:
       key: "txt.apps.shopify_app.app.parameters.api_key.label"
       title: "Token from the user"
-      value: "Api Key"
+      value: "API Key"
   - translation:
       key: "txt.apps.shopify_app.app.parameters.password.label"
       title: "Password from the user"
@@ -221,20 +221,20 @@ parts:
       key: "txt.apps.shopify_app.orders.view_all"
       title: "Link text to show all orders of the customer"
       value: "View all orders"
-- translation:
+  - translation:
       key: "txt.apps.shopify_app.orders.view_single"
       title: "Link text to show the order on Shopify"
       value: "Click here to view order in Shopify"
-- translation:
+  - translation:
       key: "txt.apps.shopify_app.orders.view"
       title: "Link text to show the order on Shopify"
       value: "View order"
       obsolete: "2016-10-31"
-- translation:
+  - translation:
       key: "txt.apps.shopify_app.global.setup"
       title: "Setup notification"
       value: "This app needs to be configured in Shopify."
-- translation:
+  - translation:
       key: "txt.apps.shopify_app.global.setup_button"
       title: "Setup button text"
       value: "Set up"
